@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Views.SignUpPage"
+             BackgroundColor="#f8f9fa"
+             Title="Sign Up">
+    <ScrollView>
+        <Grid Padding="{OnIdiom Phone='20,40', Tablet='40,60'}" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackLayout Grid.Row="0" Spacing="10">
+                <Label Text="Create Account" 
+                       FontSize="{OnIdiom Phone=24, Tablet=32}"
+                       TextColor="#1a1a1a"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+                <Label Text="Join us to start shopping"
+                       FontSize="{OnIdiom Phone=14, Tablet=16}"
+                       TextColor="#666666"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!-- Sign Up Form -->
+            <Frame Grid.Row="1" 
+                   Padding="20"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   BackgroundColor="White"
+                   Margin="{OnIdiom Phone='0', Tablet='60,0'}">
+                <StackLayout Spacing="20">
+                    <Frame Padding="15,5"
+                           BorderColor="#e0e0e0"
+                           CornerRadius="5"
+                           HasShadow="False">
+                        <Entry x:Name="UsernameEntry" 
+                               Placeholder="Username"
+                               PlaceholderColor="#999999"
+                               FontSize="{OnIdiom Phone=16, Tablet=18}"/>
+                    </Frame>
+
+                    <Frame Padding="15,5"
+                           BorderColor="#e0e0e0"
+                           CornerRadius="5"
+                           HasShadow="False">
+                        <Entry x:Name="PasswordEntry" 
+                               Placeholder="Password"
+                               IsPassword="True"
+                               PlaceholderColor="#999999"
+                               FontSize="{OnIdiom Phone=16, Tablet=18}"/>
+                    </Frame>
+
+                    <Frame Padding="15,5"
+                           BorderColor="#e0e0e0"
+                           CornerRadius="5"
+                           HasShadow="False">
+                        <Entry x:Name="ConfirmPasswordEntry" 
+                               Placeholder="Confirm Password"
+                               IsPassword="True"
+                               PlaceholderColor="#999999"
+                               FontSize="{OnIdiom Phone=16, Tablet=18}"/>
+                    </Frame>
+
+                    <Button Text="Create Account"
+                            BackgroundColor="#6200EE"
+                            TextColor="White"
+                            CornerRadius="5"
+                            HeightRequest="{OnIdiom Phone=45, Tablet=50}"
+                            FontSize="{OnIdiom Phone=16, Tablet=18}"
+                            Clicked="OnSignUpClicked"/>
+
+                    <Label Text="Already have an account?"
+                           TextColor="#666666"
+                           HorizontalOptions="Center"
+                           FontSize="{OnIdiom Phone=14, Tablet=16}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToLoginCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+
+            <!-- Terms and Privacy -->
+            <StackLayout Grid.Row="2" 
+                         VerticalOptions="End" 
+                         Spacing="10"
+                         Margin="0,20,0,0">
+                <Label TextColor="#666666"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="{OnIdiom Phone=12, Tablet=14}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="By signing up, you agree to our "/>
+                            <Span Text="Terms" TextColor="#6200EE" TextDecorations="Underline"/>
+                            <Span Text=" and "/>
+                            <Span Text="Privacy Policy" TextColor="#6200EE" TextDecorations="Underline"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

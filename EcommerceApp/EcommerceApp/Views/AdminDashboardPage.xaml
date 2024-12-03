@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Views.AdminDashboardPage"
+             Title="Admin Dashboard">
+    <ContentPage Title="Products">
+        <StackLayout>
+            <Button Text="Add Product" Clicked="OnAddProductClicked" />
+            <ListView x:Name="ProductsListView" ItemSelected="OnProductSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding name}" Detail="{Binding price, StringFormat='{0:C}'}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Categories">
+        <StackLayout>
+            <Button Text="Add Category" Clicked="OnAddCategoryClicked" />
+            <ListView x:Name="CategoriesListView" ItemSelected="OnCategorySelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
+

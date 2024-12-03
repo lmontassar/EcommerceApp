@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Views.CartPage"
+             Title="Cart">
+    <ContentPage.Content>
+        <RefreshView>
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <!-- Title Section -->
+                    <Frame BackgroundColor="#f8f9fa" Padding="15">
+                        <Label Text="Shopping Cart"
+                               FontSize="{OnIdiom Phone=20, Tablet=24}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                    </Frame>
+
+                    <!-- ListView for Cart Items -->
+                    <ListView x:Name="CartItemsListView"
+                              SeparatorVisibility="Default"
+                              HasUnevenRows="True"
+                              HeightRequest="{OnIdiom Phone=350, Tablet=600}"
+                              Footer="">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="10,5" Padding="10" BorderColor="#eee">
+                                        <Grid RowSpacing="10" ColumnSpacing="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Product Info -->
+                                            <StackLayout Grid.Row="0" Grid.Column="0">
+                                                <Label Text="{Binding product.name}" 
+                                                       FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                                       FontAttributes="Bold"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <Label Text="{Binding product.price, StringFormat='{0:C}'}"
+                                                       FontSize="{OnIdiom Phone=14, Tablet=16}"
+                                                       TextColor="#666"/>
+                                            </StackLayout>
+
+                                            <!-- Delete Button -->
+                                            <Button Grid.Row="0" Grid.Column="1"
+                                                    Text="Delete"
+                                                    FontSize="{OnIdiom Phone=12, Tablet=14}"
+                                                    WidthRequest="{OnIdiom Phone=70, Tablet=100}"
+                                                    HeightRequest="{OnIdiom Phone=35, Tablet=40}"
+                                                    Padding="0"
+                                                    BackgroundColor="#dc3545"
+                                                    TextColor="White"
+                                                    CornerRadius="5"
+                                                    Clicked="OnDeleteClicked"/>
+
+                                            <!-- Quantity Controls -->
+                                            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                         Orientation="Horizontal"
+                                                         Spacing="15">
+                                                <Label Text="Quantity:" 
+                                                       VerticalOptions="Center"
+                                                       FontSize="{OnIdiom Phone=14, Tablet=16}"/>
+                                                <Frame Padding="5" 
+                                                       BorderColor="#ddd"
+                                                       CornerRadius="5"
+                                                       HasShadow="False">
+                                                    <StackLayout Orientation="Horizontal" Spacing="10">
+                                                        <Button Text="-"
+                                                                WidthRequest="{OnIdiom Phone=35, Tablet=40}"
+                                                                HeightRequest="{OnIdiom Phone=35, Tablet=40}"
+                                                                FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                                                Clicked="OnDecrementClicked"
+                                                                BackgroundColor="Transparent"/>
+                                                        <Label Text="{Binding quantity}"
+                                                               VerticalOptions="Center"
+                                                               HorizontalOptions="Center"
+                                                               FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                                               WidthRequest="40"/>
+                                                        <Button Text="+"
+                                                                WidthRequest="{OnIdiom Phone=35, Tablet=40}"
+                                                                HeightRequest="{OnIdiom Phone=35, Tablet=40}"
+                                                                FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                                                Clicked="OnIncrementClicked"
+                                                                BackgroundColor="Transparent"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <!-- Total Section -->
+                    <Frame BackgroundColor="#f8f9fa" Padding="15" Margin="0,10,0,0">
+                        <StackLayout Spacing="10">
+                            <Label x:Name="TotalLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="{OnIdiom Phone=18, Tablet=22}"
+                                   HorizontalOptions="End"/>
+                            <Button Text="Checkout"
+                                    FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                    BackgroundColor="#28a745"
+                                    TextColor="White"
+                                    CornerRadius="5"
+                                    HeightRequest="{OnIdiom Phone=45, Tablet=50}"
+                                    Margin="0,10,0,0"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
