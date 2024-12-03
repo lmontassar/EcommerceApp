@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Views.ProductListPage"
+             BackgroundColor="#f8f9fa"
+             Title="Products">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Products List -->
+        <RefreshView Grid.Row="1" 
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView x:Name="ProductsListView"
+                           SelectionMode="Single"
+                           SelectionChanged="OnProductSelected">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                   Span="{OnIdiom Phone=2, Tablet=3}"
+                                   HorizontalItemSpacing="10"
+                                   VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                               CornerRadius="10"
+                               HasShadow="True"
+                               BackgroundColor="White"
+                               Margin="5">
+                            <StackLayout Spacing="10">
+                                <Frame Padding="0"
+                                       CornerRadius="5"
+                                       IsClippedToBounds="True"
+                                       HasShadow="False">
+                                    <Image Source="{Binding FullImageUrl}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="{OnIdiom Phone=120, Tablet=200}"/>
+                                </Frame>
+                                <Label Text="{Binding name}"
+                                       FontSize="{OnIdiom Phone=14, Tablet=16}"
+                                       TextColor="#1a1a1a"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+                                <Label Text="{Binding price, StringFormat='{0:C}'}"
+                                       FontSize="{OnIdiom Phone=16, Tablet=18}"
+                                       TextColor="#6200EE"
+                                       FontAttributes="Bold"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Bottom Navigation -->
+        <Frame Grid.Row="2"
+               Padding="15,10"
+               BackgroundColor="White"
+               HasShadow="True">
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="View Cart"
+                        Grid.Column="1"
+                        BackgroundColor="#6200EE"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="{OnIdiom Phone=40, Tablet=45}"
+                        FontSize="{OnIdiom Phone=14, Tablet=16}"
+                        Clicked="OnViewCartClicked"/>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp.Android", "EcommerceApp\EcommerceApp.Android\EcommerceApp.Android.csproj", "{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp.iOS", "EcommerceApp\EcommerceApp.iOS\EcommerceApp.iOS.csproj", "{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp", "EcommerceApp\EcommerceApp\EcommerceApp.csproj", "{5410A02B-7972-495A-9061-6B4BCBBE0153}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5535EEBE-BDAB-42BC-9A1F-4CE4416EB210}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Debug|Any CPU.Build.0 = Debug|iPhone
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Debug|Any CPU.Deploy.0 = Debug|iPhone
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
+		{ED13E0F9-F9E8-44A9-9903-5BC1ACC9C147}.Release|Any CPU.Deploy.0 = Release|iPhoneSimulator
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5410A02B-7972-495A-9061-6B4BCBBE0153}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
