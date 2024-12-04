@@ -2,30 +2,127 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Views.AdminDashboardPage"
-             Title="Admin Dashboard">
-    <ContentPage Title="Products">
-        <StackLayout>
-            <Button Text="Add Product" Clicked="OnAddProductClicked" />
-            <ListView x:Name="ProductsListView" ItemSelected="OnProductSelected">
+             Title="Admin Dashboard"
+             BarBackgroundColor="{StaticResource PrimaryColor}"
+             BarTextColor="White">
+
+    <ContentPage Title="Products" Style="{StaticResource PageStyle}">
+        <Grid RowSpacing="16" Padding="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Add Product" 
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="OnAddProductClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="Logout"
+                        Style="{StaticResource LogoutButtonStyle}"
+                        Clicked="OnLogoutClicked"/>
+            </Grid>
+
+            <!-- Product List -->
+            <ListView x:Name="ProductsListView" 
+                      Grid.Row="1"
+                      Style="{StaticResource ListViewStyle}"
+                      ItemTapped="OnProductTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding name}" Detail="{Binding price, StringFormat='{0:C}'}" />
+                        <ViewCell>
+                            <Frame Style="{StaticResource CardStyle}"
+                                   Margin="0,8">
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame IsClippedToBounds="True"
+                                           Padding="0"
+                                           CornerRadius="8">
+                                        <Image Source="{Binding FullImageUrl}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="60"
+                                               WidthRequest="60"/>
+                                    </Frame>
+
+                                    <StackLayout Grid.Column="1"
+                                                 Spacing="4"
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding name}"
+                                               TextColor="{StaticResource TextPrimaryColor}"
+                                               FontAttributes="Bold"/>
+                                        <Label Text="{Binding price, StringFormat='{0:C}'}"
+                                               TextColor="{StaticResource PrimaryColor}"/>
+                                    </StackLayout>
+
+                                    <Label Grid.Column="2"
+                                           Text="Edit"
+                                           TextColor="{StaticResource PrimaryColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentPage>
-    <ContentPage Title="Categories">
-        <StackLayout>
-            <Button Text="Add Category" Clicked="OnAddCategoryClicked" />
-            <ListView x:Name="CategoriesListView" ItemSelected="OnCategorySelected">
+
+    <ContentPage Title="Categories" Style="{StaticResource PageStyle}">
+        <Grid RowSpacing="16" Padding="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Add Category" 
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Clicked="OnAddCategoryClicked"/>
+
+            <ListView x:Name="CategoriesListView" 
+                      Grid.Row="1"
+                      Style="{StaticResource ListViewStyle}"
+                      ItemTapped="OnCategoryTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding name}" />
+                        <ViewCell>
+                            <Frame Style="{StaticResource CardStyle}"
+                                   Margin="0,8">
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding name}"
+                                           TextColor="{StaticResource TextPrimaryColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"/>
+
+                                    <Label Grid.Column="1"
+                                           Text="Edit"
+                                           TextColor="{StaticResource PrimaryColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentPage>
 </TabbedPage>
 

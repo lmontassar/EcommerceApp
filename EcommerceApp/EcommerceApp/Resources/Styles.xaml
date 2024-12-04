@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Colors -->
+    <Color x:Key="PrimaryColor">#FF4500</Color>
+    <Color x:Key="SecondaryColor">#FF8C00</Color>
+    <Color x:Key="AccentColor">#FF6347</Color>
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="SurfaceColor">#F8F9FA</Color>
+    <Color x:Key="TextPrimaryColor">#1A1A1A</Color>
+    <Color x:Key="TextSecondaryColor">#666666</Color>
+    <Color x:Key="BorderColor">#E0E0E0</Color>
+    <Color x:Key="ErrorColor">#DC3545</Color>
+    <Color x:Key="SuccessColor">#10B981</Color>
+
+    <!-- Common Styles -->
+    <Style x:Key="PageStyle" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource SurfaceColor}" />
+    </Style>
+
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{OnIdiom Phone=24, Tablet=32}" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimaryColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="SubheaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{OnIdiom Phone=14, Tablet=16}" />
+        <Setter Property="TextColor" Value="{StaticResource TextSecondaryColor}" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HeightRequest" Value="{OnIdiom Phone=45, Tablet=50}" />
+        <Setter Property="FontSize" Value="{OnIdiom Phone=16, Tablet=18}" />
+    </Style>
+
+    <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HeightRequest" Value="{OnIdiom Phone=45, Tablet=50}" />
+        <Setter Property="FontSize" Value="{OnIdiom Phone=16, Tablet=18}" />
+    </Style>
+
+    <Style x:Key="LogoutButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HeightRequest" Value="{OnIdiom Phone=35, Tablet=40}" />
+        <Setter Property="FontSize" Value="{OnIdiom Phone=14, Tablet=16}" />
+        <Setter Property="Padding" Value="15,0" />
+    </Style>
+
+    <Style x:Key="CardStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondaryColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{OnIdiom Phone=16, Tablet=18}" />
+    </Style>
+
+    <Style x:Key="ListViewStyle" TargetType="ListView">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="SeparatorColor" Value="{StaticResource BorderColor}" />
+        <Setter Property="HasUnevenRows" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+    </Style>
+</ResourceDictionary>
+

@@ -17,6 +17,14 @@ namespace EcommerceApp.Views
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(UsernameEntry.Text) ||
+                string.IsNullOrWhiteSpace(PasswordEntry.Text) ||
+                string.IsNullOrWhiteSpace(ConfirmPasswordEntry.Text))
+            {
+                await DisplayAlert("Error", "Please fill in all fields", "OK");
+                return;
+            }
+
             if (PasswordEntry.Text != ConfirmPasswordEntry.Text)
             {
                 await DisplayAlert("Error", "Passwords do not match", "OK");
@@ -35,12 +43,17 @@ namespace EcommerceApp.Views
                 Application.Current.Properties["AuthToken"] = response.Token;
                 Application.Current.Properties["Username"] = UsernameEntry.Text;
                 await Application.Current.SavePropertiesAsync();
-                await Navigation.PushAsync(new ProductListPage());
+
+                Application.Current.MainPage = new NavigationPage(new ProductListPage())
+                {
+                    BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"],
+                    BarTextColor = Color.White
+                };
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Sign up error: {ex}");
-                await DisplayAlert("Error", $"Sign up error: {ex}", "OK");
+                await DisplayAlert("Error", "Sign up failed. Please try again.", "OK");
             }
         }
     }

@@ -40,7 +40,7 @@ namespace EcommerceApp.Views
             {
                 var totalPrice = _cart.items.Sum(item => item.product.price * item.quantity);
                 var totalQuantity = _cart.items.Sum(item => item.quantity);
-                TotalLabel.Text = $"Total: {totalPrice:C} ({totalQuantity} items)";
+                TotalLabel.Text = $"${totalPrice:N2}";
             }
         }
 
@@ -93,13 +93,80 @@ namespace EcommerceApp.Views
             {
                 var username = Application.Current.Properties["Username"] as string;
                 _cart = await _apiService.PutAsync<Cart>($"cart/update?username={username}&productId={item.product.id}&quantity={newQuantity}");
+
+                // Update the local item quantity
+                item.quantity = newQuantity;
+
+                // Refresh the list view
+                CartItemsListView.ItemsSource = null;
                 CartItemsListView.ItemsSource = _cart.items;
+
                 UpdateTotal();
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", "Failed to update item quantity", "OK");
             }
+        }
+
+        private async void OnCheckoutClicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Success", "Thank you for your purchase!", "OK");
+            LoadCart();
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            var confirm = await DisplayAlert("Confirm Logout",
+                "Are you sure you want to logout?", "Yes", "No");
+
+            if (confirm)
+            {
+                // Clear stored credentials
+                Application.Current.Properties.Remove("AuthToken");
+                Application.Current.Properties.Remove("Username");
+                await Application.Current.SavePropertiesAsync();
+
+                // Navigate back to login page
+                Application.Current.MainPage = new NavigationPage(new LoginPage())
+                {
+                    BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"],
+                    BarTextColor = Color.White
+                };
+            }
+        }
+
+        private async void OnQuantityTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is Entry entry && entry.BindingContext is CartItem item)
+            {
+                if (int.TryParse(e.NewTextValue, out int newQuantity) && newQuantity > 0)
+                {
+                    await UpdateCartItemQuantity(item, newQuantity);
+                }
+            }
+        }
+        private async void OnQuantityUnfocused(object sender, FocusEventArgs e)
+        {
+            if (sender is Entry entry && entry.BindingContext is CartItem item)
+            {
+                if (int.TryParse(entry.Text, out int newQuantity) && newQuantity > 0)
+                {
+                    await UpdateCartItemQuantity(item, newQuantity);
+                }
+                else
+                {
+                    // If the entered value is invalid, revert to the original quantity
+                    entry.Text = item.quantity.ToString();
+                }
+            }
+        }
+
+
+        protected override bool OnBackButtonPressed()
+        {
+            // Allow back navigation in cart page
+            return false;
         }
     }
 }

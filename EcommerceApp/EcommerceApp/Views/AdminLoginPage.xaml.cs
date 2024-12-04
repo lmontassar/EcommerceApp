@@ -12,10 +12,29 @@ namespace EcommerceApp.Views
         {
             InitializeComponent();
             _apiService = new ApiService();
+            CheckLoginStatus();
+        }
+
+        private async void CheckLoginStatus()
+        {
+            if (Application.Current.Properties.ContainsKey("AdminToken"))
+            {
+                Application.Current.MainPage = new NavigationPage(new AdminDashboardPage())
+                {
+                    BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"],
+                    BarTextColor = Color.White
+                };
+            }
         }
 
         private async void OnAdminLoginClicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(UsernameEntry.Text) || string.IsNullOrWhiteSpace(PasswordEntry.Text))
+            {
+                await DisplayAlert("Error", "Please enter both username and password", "OK");
+                return;
+            }
+
             try
             {
                 var response = await _apiService.PostAsync<AdminLoginResponse>("auth/admin-login", new
@@ -27,8 +46,14 @@ namespace EcommerceApp.Views
                 if (response.Role == "ADMIN")
                 {
                     Application.Current.Properties["AdminToken"] = response.Token;
+                    Application.Current.Properties["Username"] = UsernameEntry.Text;
                     await Application.Current.SavePropertiesAsync();
-                    await Navigation.PushAsync(new AdminDashboardPage());
+
+                    Application.Current.MainPage = new NavigationPage(new AdminDashboardPage())
+                    {
+                        BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"],
+                        BarTextColor = Color.White
+                    };
                 }
                 else
                 {

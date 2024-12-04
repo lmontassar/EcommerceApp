@@ -9,7 +9,7 @@ namespace EcommerceApp.Services
     public class ApiService
     {
         private readonly HttpClient _client;
-        private const string BaseUrl = "http://172.20.10.4:8089/api";
+        private const string BaseUrl = "http://192.168.0.129:8089/api";
 
         //private const string BaseUrl = "http://192.168.0.192:8089/api";
 

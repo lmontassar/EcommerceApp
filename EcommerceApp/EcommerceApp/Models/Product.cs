@@ -10,6 +10,6 @@ namespace EcommerceApp.Models
 
         public Category category { get; set; }
 
-        public string FullImageUrl => $"http://172.20.10.4:8089/api/products{imageUrl}";
+        public string FullImageUrl => $"http://192.168.0.129:8089/api/products{imageUrl}";
     }
 }

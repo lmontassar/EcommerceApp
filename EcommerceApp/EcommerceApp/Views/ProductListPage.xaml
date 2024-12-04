@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Views.ProductListPage"
-             BackgroundColor="#f8f9fa"
+             Style="{StaticResource PageStyle}"
              Title="Products">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
@@ -11,45 +11,68 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              Padding="16" 
+              BackgroundColor="{StaticResource BackgroundColor}"
+              ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Products List -->
+            <StackLayout Spacing="4">
+                <Label Text="Products" 
+                       Style="{StaticResource HeaderLabelStyle}"/>
+                <Label Text="Browse our latest collection"
+                       Style="{StaticResource SubheaderLabelStyle}"/>
+            </StackLayout>
+
+            <Button Grid.Column="1"
+                    Text="Logout"
+                    Style="{StaticResource LogoutButtonStyle}"
+                    Clicked="OnLogoutClicked"/>
+        </Grid>
+
+        <!-- Products Grid -->
         <RefreshView Grid.Row="1" 
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
             <CollectionView x:Name="ProductsListView"
+                           Margin="16"
                            SelectionMode="Single"
                            SelectionChanged="OnProductSelected">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
                                    Span="{OnIdiom Phone=2, Tablet=3}"
-                                   HorizontalItemSpacing="10"
-                                   VerticalItemSpacing="10"/>
+                                   HorizontalItemSpacing="16"
+                                   VerticalItemSpacing="16"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10"
-                               CornerRadius="10"
-                               HasShadow="True"
-                               BackgroundColor="White"
-                               Margin="5">
-                            <StackLayout Spacing="10">
+                        <Frame Style="{StaticResource CardStyle}"
+                               Margin="0">
+                            <StackLayout Spacing="12">
                                 <Frame Padding="0"
-                                       CornerRadius="5"
+                                       CornerRadius="8"
                                        IsClippedToBounds="True"
                                        HasShadow="False">
                                     <Image Source="{Binding FullImageUrl}"
                                            Aspect="AspectFill"
-                                           HeightRequest="{OnIdiom Phone=120, Tablet=200}"/>
+                                           HeightRequest="{OnIdiom Phone=140, Tablet=200}"/>
                                 </Frame>
-                                <Label Text="{Binding name}"
-                                       FontSize="{OnIdiom Phone=14, Tablet=16}"
-                                       TextColor="#1a1a1a"
-                                       LineBreakMode="TailTruncation"
-                                       MaxLines="2"/>
-                                <Label Text="{Binding price, StringFormat='{0:C}'}"
-                                       FontSize="{OnIdiom Phone=16, Tablet=18}"
-                                       TextColor="#6200EE"
-                                       FontAttributes="Bold"/>
+                                <StackLayout Spacing="4">
+                                    <Label Text="{Binding name}"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource TextPrimaryColor}"
+                                           FontSize="{OnIdiom Phone=14, Tablet=16}"/>
+                                    <Label Text="{Binding price, StringFormat='${0:N2}'}"
+                                           TextColor="{StaticResource PrimaryColor}"
+                                           FontAttributes="Bold"
+                                           FontSize="{OnIdiom Phone=16, Tablet=18}"/>
+                                </StackLayout>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
@@ -59,24 +82,26 @@
 
         <!-- Bottom Navigation -->
         <Frame Grid.Row="2"
-               Padding="15,10"
-               BackgroundColor="White"
-               HasShadow="True">
-            <Grid ColumnSpacing="10">
+               Style="{StaticResource CardStyle}"
+               Margin="0"
+               CornerRadius="0">
+            <Grid ColumnSpacing="16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Text="View Cart"
-                        Grid.Column="1"
-                        BackgroundColor="#6200EE"
-                        TextColor="White"
-                        CornerRadius="5"
+                <Label Text="{Binding CartItemCount, StringFormat='{0} items in cart'}"
+                       VerticalOptions="Center"
+                       Style="{StaticResource SubheaderLabelStyle}"/>
+
+                <Button Grid.Column="1"
+                        Text="View Cart"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         HeightRequest="{OnIdiom Phone=40, Tablet=45}"
-                        FontSize="{OnIdiom Phone=14, Tablet=16}"
                         Clicked="OnViewCartClicked"/>
             </Grid>
         </Frame>
     </Grid>
 </ContentPage>
+

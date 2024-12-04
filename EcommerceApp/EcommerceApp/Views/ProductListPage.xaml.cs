@@ -16,7 +16,6 @@ namespace EcommerceApp.Views
             InitializeComponent();
             _apiService = new ApiService();
             LoadProducts();
-
         }
 
         private async void LoadProducts()
@@ -37,17 +36,40 @@ namespace EcommerceApp.Views
             var selectedProduct = e.CurrentSelection.FirstOrDefault() as Product;
             if (selectedProduct == null) return;
 
-            // Navigate to the detail page
             await Navigation.PushAsync(new ProductDetailPage(selectedProduct));
-
-            // Clear selection
             ((CollectionView)sender).SelectedItem = null;
         }
-
 
         private async void OnViewCartClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CartPage());
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            var confirm = await DisplayAlert("Confirm Logout",
+                "Are you sure you want to logout?", "Yes", "No");
+
+            if (confirm)
+            {
+                // Clear stored credentials
+                Application.Current.Properties.Remove("AuthToken");
+                Application.Current.Properties.Remove("Username");
+                await Application.Current.SavePropertiesAsync();
+
+                // Navigate back to login page
+                Application.Current.MainPage = new NavigationPage(new LoginPage())
+                {
+                    BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"],
+                    BarTextColor = Color.White
+                };
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            // Prevent back navigation when logged in
+            return true;
         }
     }
 }

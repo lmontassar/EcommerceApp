@@ -2,19 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Views.CategoryEditPage"
-             Title="Caregory Edit">
+             Style="{StaticResource PageStyle}"
+             Title="{Binding PageTitle}">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20" Spacing="20">
-                <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="20">
+                <Frame Style="{StaticResource CardStyle}">
                     <StackLayout Spacing="15">
-                        <Label Text="Category Name" FontSize="16" TextColor="#333333"/>
-                        <Entry x:Name="NameEntry" Text="{Binding Name}" Placeholder="Enter category name"/>
+                        <Label Text="Category Name" Style="{StaticResource SubheaderLabelStyle}"/>
+                        <Frame Padding="15,0" 
+                               BorderColor="{StaticResource BorderColor}"
+                               CornerRadius="8"
+                               HasShadow="False"
+                               HeightRequest="45">
+                            <Entry x:Name="NameEntry" 
+                                   Text="{Binding Name}" 
+                                   Placeholder="Enter category name"
+                                   Style="{StaticResource EntryStyle}"/>
+                        </Frame>
                     </StackLayout>
                 </Frame>
 
-                <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="#6200EE" TextColor="White" CornerRadius="5"/>
-                <Button Text="Delete" Command="{Binding DeleteCommand}" IsVisible="{Binding IsExisting}" BackgroundColor="#FF0000" TextColor="White" CornerRadius="5"/>
+                <Button Text="Save" 
+                        Command="{Binding SaveCommand}" 
+                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                <Button Text="Delete" 
+                        Command="{Binding DeleteCommand}" 
+                        IsVisible="{Binding IsExisting}" 
+                        Style="{StaticResource LogoutButtonStyle}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
